@@ -1,24 +1,37 @@
 // Importing jQuery
 import $ from 'jquery';
-// Importing debounce from lodash
-import { debounce } from 'lodash';
+// Importing lodash as _
+import _ from 'lodash';
 
-let count = 0; // A variable to keep track of the number of times the button has been clicked
+// Variable to keep track of button clicks
+let count = 0;
 
 // Function to update the counter
 function updateCounter() {
-    count++;
-    $('#count').text(`${count} clicks on the button`);
+  count += 1;
+  $('#count').text(`${count} clicks on the button`);
 }
 
+// Function to add elements
+function addElements() {
+  // Adding paragraph elements
+  $('body').append('<p>Holberton Dashboard</p>');
+  $('body').append('<p>Dashboard data for the students</p>');
+  
+  // Adding button element
+  $('body').append('<button id="clickButton">Click here to get started</button>');
+  
+  // Adding paragraph element with id='count'
+  $('body').append('<p id="count"></p>');
+  
+  // Adding another paragraph
+  $('body').append('<p>Copyright - Holberton School</p>');
+  
+  // Binding the debounce function to the click event using .on()
+  $('#clickButton').on('click', _.debounce(updateCounter, 500));
+}
+
+// Adding elements when the document is ready
 $(function() {
-    // Appending the paragraphs and button to the body
-    $('body').append('<p>Holberton Dashboard</p>');
-    $('body').append('<p>Dashboard data for the students</p>');
-    $('body').append('<button id="startBtn">Click here to get started</button>');
-    $('body').append('<p id="count"></p>');
-    $('body').append('<p>Copyright - Holberton School</p>');
-    
-    // Binding the button's click event to the debounced version of updateCounter
-    $('#startBtn').on('click', debounce(updateCounter, 300)); // 300ms debounce time
+  addElements();
 });
