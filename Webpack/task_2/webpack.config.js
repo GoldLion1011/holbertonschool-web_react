@@ -14,7 +14,7 @@ module.exports = {
             // Adding rule for processing CSS files
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: ['style-loader', 'css-loader', 'image-webpack-loader', 'file-loader']
             },
 
             // Adding rule for processing image files
