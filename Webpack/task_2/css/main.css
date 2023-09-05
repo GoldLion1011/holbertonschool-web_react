@@ -1,0 +1,18 @@
+/* Make the button and counter display inline */
+#startBtn, #count {
+  display: inline-block;
+  vertical-align: middle;  /* Align both the button and counter text vertically */
+}
+
+/* Make the counter text bold */
+#count {
+  font-weight: bold;
+  margin-left: 10px;  /* Add some space between the button and the counter text */
+}
+
+#logo {
+  width: 200px;
+  height: 200px;
+  background: url('../assets/holberton-logo.jpg');
+  background-size: 200px 200px;
+}
