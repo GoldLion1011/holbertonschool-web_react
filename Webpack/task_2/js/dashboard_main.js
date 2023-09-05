@@ -14,7 +14,7 @@ function updateCounter() {
 // Function to add elements
 function addElements() {
   // Adding logo image
-  $('body').prepend('<div id="logo"></div>');
+  // $('body').prepend('<div id="logo"></div>');
 
   // Adding paragraph elements
   $('body').append('<p>Holberton Dashboard</p>');
