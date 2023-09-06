@@ -1,0 +1,13 @@
+.Notifications {
+  display: flex;
+  border: 2px solid rgb(225, 17, 17);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.Notifications p {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
+  color: black;
+  margin: 2;
+}

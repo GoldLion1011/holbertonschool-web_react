@@ -1,0 +1,45 @@
+.App-header {
+	display: flex;
+	align-items: center;
+	color: #e0354b;
+	border-bottom: 3px #e0354b solid;
+}
+
+.App-header h1 {
+	display: inline;
+}
+
+.App-header img {
+	width: 20rem;
+	height: 20rem;
+}
+
+.App-body {
+	margin-left: 2rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.App-footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	border-top: 3px #e0354b solid;
+}
+
+.App-footer p {
+	text-align: center;
+	font-style: italic;
+}
+
+/* Style for email and password input forms */
+input[type="email"], input[type="password"] {
+	display: flex;
+	margin: 0;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	width: 100%;
+	box-sizing: border-box;
+}
