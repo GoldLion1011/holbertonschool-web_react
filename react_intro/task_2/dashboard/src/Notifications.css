@@ -1,13 +1,32 @@
+/* add a border and some padding around class Notifications */
 .Notifications {
-  display: flex;
-  border: 2px solid rgb(225, 17, 17);
-  border-radius: 8px;
-  padding: 10px;
+  border: 2px solid #e0354b;
+  padding: 1rem;
+  margin: 3rem;
+  border-radius: 1rem;
 }
 
-.Notifications p {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 18px;
-  color: black;
-  margin: 2;
+.Notifications button,
+.close-icon {
+  float: inline-end;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+  background-image: url(./close-icon.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: white;
+  background-position: center;
+}
+
+/* Style default priority notifications */
+[data-priority="default"] {
+  color: blue;
+}
+
+/* Style urgent priority notifications */
+[data-priority="urgent"] {
+  color: red;
 }
