@@ -67,4 +67,5 @@ describe('App Component after login', () => {
     const CourseListElement = wrapper.find('table');
     expect(CourseListElement.exists()).toBe(true);
   });
+
 });
