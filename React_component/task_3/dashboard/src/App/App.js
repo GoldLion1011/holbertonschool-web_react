@@ -6,6 +6,8 @@ import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
 import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList';
+import BodySectionWithMarginBottom from './BodySectionWithMarginBottom';
+import BodySection from './BodySection';
 
 // create listNotifications array
 const listNotifications = [
@@ -41,15 +43,26 @@ class App extends Component {
     const { isLoggedIn } = this.props;
     return (
       <>
-      <div className='header'>
-        <Notifications listNotifications={listNotifications} />
-        <Header />
-      </div>
-      <div className='App-body'>
-        {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
-      </div>
-      <Footer />
-    </>
+        <div className='header'>
+          <Notifications listNotifications={listNotifications} />
+          <Header />
+        </div>
+        <div className='App-body'>
+          {isLoggedIn ? (
+            <BodySectionWithMarginBottom title="Course list">
+              <CourseList listCourses={listCourses} />
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login />
+            </BodySectionWithMarginBottom>
+          )}
+          <BodySection title="News from the School">
+            <p>Some random text</p>
+          </BodySection>
+        </div>
+        <Footer />
+      </>
     );
   }
 }
