@@ -97,7 +97,6 @@ class Notifications extends Component {
 
     return (
       <div id='container' className={css(styles.container)}>
-        {/* Define click handler for "Your notifications" */}
         <div
           className={`menuItem ${css(styles.menuItem)} ${css(styles.fadeBounceIn)}`}
           onClick={handleDisplayDrawer} // Call handleDisplayDrawer on click
@@ -141,8 +140,8 @@ class Notifications extends Component {
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
-  handleDisplayDrawer: PropTypes.func.isRequired, // Define propTypes for new props
-  handleHideDrawer: PropTypes.func.isRequired,    // Define propTypes for new props
+  handleDisplayDrawer: PropTypes.func.isRequired,
+  handleHideDrawer: PropTypes.func.isRequired,
 };
 
 Notifications.defaultProps = {

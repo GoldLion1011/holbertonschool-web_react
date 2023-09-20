@@ -4,7 +4,6 @@ import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBot
 
 const Login = () => (
   <>
-    <BodySectionWithMarginBottom title='Log in to continue'>
       <div className={`Login ${css(styles.Login)}`}>
         <p>Login to access the full dashboard</p>
           <form className={css(styles.form)}>
@@ -19,7 +18,6 @@ const Login = () => (
             <button className={`button ${css(styles.button)}`}>OK</button>
           </form>
       </div>
-    </BodySectionWithMarginBottom>
   </>
 );
 

@@ -30,84 +30,85 @@ const styles = StyleSheet.create({
   },
 });
 
-// create listNotifications array
-const listNotifications = [
-  { id: 1, type: 'default', value: 'New course available', html: undefined },
-  { id: 2, type: 'urgent', value: 'New resume available', html: undefined },
-  { id: 3, type: 'urgent', value: undefined, html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' }},
-];
-
-// create listCourses array
-const listCourses = [
-  { id: 1, name: 'ES6', credit: 60 },
-  { id: 2, name: 'Webpack', credit: 20 },
-  { id: 3, name: 'React', credit: 40 },
-];
-
 class App extends Component {
   constructor(props) {
     super(props);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.state = {
-      displayDrawer: false, // Initially set to false
+      displayDrawer: false,
     };
   }
 
-  // Function to handle displaying the drawer
-  handleDisplayDrawer = () => {
-    this.setState({
-      displayDrawer: true,
-    });
-  };
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false });
+  }
 
-  // Function to handle hiding the drawer
-  handleHideDrawer = () => {
-    this.setState({
-      displayDrawer: false,
-    });
-  };
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true });
+  }
 
   componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  };
+    window.addEventListener('keydown', this.handleKeydown);
+  }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  };
+    window.removeEventListener('keydown', this.handleKeydown);
+  }
 
-  handleKeyDown = (event) => {
-    console.log('A key was pressed', event.key);
+  handleKeydown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
       alert('Logging you out');
-      this.props.logOut();
+      const { logOut } = this.props;
+      logOut();
     }
   };
 
   render() {
-    const { isLoggedIn, logOut } = this.props;
-    const { displayDrawer } = this.state;
+    const { isLoggedIn } = this.props;
+
+    const listCourses = [
+      { id: '1', name: 'ES6', credit: 60 },
+      { id: '2', name: 'Webpack', credit: 20 },
+      { id: '3', name: 'React', credit: 40 },
+    ];
+
+    const listNotifications = [
+      { id: 1, type: 'default', value: 'New course available' },
+      { id: 2, type: 'urgent', value: 'New resume available' },
+      { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
+    ];
 
     return (
-      <>
-        <div className={`App-header ${css(styles.header)}`}>
-          <Notifications
-            displayDrawer={displayDrawer}
-            handleDisplayDrawer={this.handleDisplayDrawer}
-            handleHideDrawer={this.handleHideDrawer}
-            listNotifications={listNotifications}
-          />
-          <Header />
-        </div>
-        <div className={`App-body ${css(styles.body)}`}>
-          {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
+      <div className={css(styles.body)}>
+        <Notifications
+          handleHideDrawer={this.handleHideDrawer}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          displayDrawer={this.state.displayDrawer}
+          listNotifications={listNotifications}
+        />
+        <Header />
+        <div className={css(styles.body)}>
+          {isLoggedIn ? (
+            <BodySectionWithMarginBottom title="Course list">
+              <CourseList listCourses={listCourses} />
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login />
+            </BodySectionWithMarginBottom>
+          )}
           <BodySection title='News from the School'>
             <p>Effective today and going forward, there shall be no Kool Aid made on campus, neither in a pitcher, coffee maker, a rain boot, absolutely no other containers. Strict Kool Aid enforcement guidelines have been issued and any student caught making Kool Aid shall be force fed 7 dozen Crunch Wrap Supremes. NO EXCEPTIONS and NO HOT SAUCE.</p>
           </BodySection>
-        </div>
-        <Footer className={`App-footer ${css(styles.footer)}`} />
-      </>
+          </div>
+        <footer className={css(styles.footer)}>
+          <Footer />
+        </footer>
+      </div>
     );
-  };
-};
+  }
+}
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
