@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
 // import components
 import Notifications from '../Notifications/Notifications';
+import { getLatestNotification } from '../utils/utils';
 import Login from '../Login/Login';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import CourseList from '../CourseList/CourseList';
 import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+
+const styles = StyleSheet.create({
+  header: {
+    fontFamily: 'serif',
+    borderBottom: '3px solid #e0354b',
+  },
+
+  body: {
+    fontFamily: 'sans-serif',
+    padding: '10px 8px',
+    minHeight: '200px',
+  },
+  footer: {
+    borderTop: '3px solid #e0354b',
+    textAlign: 'center',
+    fontStyle: 'italic',
+  },
+});
 
 // create listNotifications array
 const listNotifications = [
@@ -25,7 +44,28 @@ const listCourses = [
   { id: 3, name: 'React', credit: 40 },
 ];
 
-class App extends React.Component {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayDrawer: false, // Initially set to false
+    };
+  }
+
+  // Function to handle displaying the drawer
+  handleDisplayDrawer = () => {
+    this.setState({
+      displayDrawer: true,
+    });
+  };
+
+  // Function to handle hiding the drawer
+  handleHideDrawer = () => {
+    this.setState({
+      displayDrawer: false,
+    });
+  };
+
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
   };
@@ -44,10 +84,17 @@ class App extends React.Component {
 
   render() {
     const { isLoggedIn, logOut } = this.props;
+    const { displayDrawer } = this.state;
+
     return (
       <>
         <div className={`App-header ${css(styles.header)}`}>
-          <Notifications listNotifications={listNotifications} />
+          <Notifications
+            displayDrawer={displayDrawer}
+            handleDisplayDrawer={this.handleDisplayDrawer}
+            handleHideDrawer={this.handleHideDrawer}
+            listNotifications={listNotifications}
+          />
           <Header />
         </div>
         <div className={`App-body ${css(styles.body)}`}>
@@ -72,22 +119,5 @@ App.defaultProps = {
   logOut: () => {},
 };
 
-const styles = StyleSheet.create({
-  header: {
-    fontFamily: 'serif',
-    borderBottom: '3px solid #e0354b',
-  },
-
-  body: {
-    fontFamily: 'sans-serif',
-    padding: '10px 8px',
-    minHeight: '200px',
-  },
-  footer: {
-    borderTop: '3px solid #e0354b',
-    textAlign: 'center',
-    fontStyle: 'italic',
-  },
-});
 
 export default App;
