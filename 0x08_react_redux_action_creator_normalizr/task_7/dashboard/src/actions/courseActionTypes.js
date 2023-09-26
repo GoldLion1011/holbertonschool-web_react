@@ -1,0 +1,4 @@
+export const Actions = {
+  SELECT_COURSE: 'SELECT_COURSE',
+  UNSELECT_COURSE: 'UNSELECT_COURSE',
+};
