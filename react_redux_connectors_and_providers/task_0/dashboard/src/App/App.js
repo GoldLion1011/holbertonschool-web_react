@@ -5,6 +5,7 @@ import { StyleSheet, css } from 'aphrodite';
 import Notifications from '../Notifications/Notifications';
 import { getLatestNotification } from '../utils/utils';
 import { AppContext } from './AppContext';
+import { uiReducer, initialState } from '../reducers/uiReducer';
 import Login from '../Login/Login';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -41,7 +42,7 @@ class App extends Component {
         password: '',
         isLoggedIn: false,
       },
-      listNotifications: [], // Initialize listNotifications as an empty array
+      listNotifications: [],
     };
   }
 
@@ -64,11 +65,10 @@ class App extends Component {
   handleKeydown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
       alert('Logging you out');
-      this.logOut(); // Use the local logOut function
+      this.logOut();
     }
   };
 
-  // logIn function that sets the user's email, password, and isLoggedIn
   logIn = (email, password) => {
     this.setState({
       user: {
@@ -79,7 +79,6 @@ class App extends Component {
     });
   };
 
-  // logOut function to reset the user object
   logOut = () => {
     this.setState({
       user: {
@@ -90,7 +89,6 @@ class App extends Component {
     });
   };
 
-  // Function to mark a notification as read
   markNotificationAsRead = (id) => {
     this.setState((prevState) => {
       const updatedList = prevState.listNotifications.filter(
@@ -103,7 +101,9 @@ class App extends Component {
   };
 
   render() {
-    const { displayDrawer, user } = this.state;
+    const { isLoggedIn } = this.props;
+
+    // const { displayDrawer, user } = this.state;
 
     const listCourses = [
       { id: 1, name: 'ES6', credit: 60 },
@@ -125,7 +125,7 @@ class App extends Component {
             handleDisplayDrawer={this.handleDisplayDrawer}
             displayDrawer={displayDrawer}
             listNotifications={listNotifications}
-            markNotificationAsRead={this.markNotificationAsRead} // Pass the function to Notifications
+            markNotificationAsRead={this.markNotificationAsRead}
           />
           <Header />
           <div className={css(styles.body)}>
@@ -152,7 +152,7 @@ class App extends Component {
 }
 
   const mapStateToProps = (state) => ({
-    isLoggedIn: state.get('isUserLoggedIn'),
+    isLoggedIn: state && state.uiReducer && state.uiReducer.get('isUserLoggedIn'),
   });
 
-export default App;
+export default connect(mapStateToProps)(App);
